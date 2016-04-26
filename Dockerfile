@@ -7,7 +7,7 @@ RUN apt-get update -y \
 	&& apt-get install -y -q \
 		python-software-properties \
 		software-properties-common \
-	&& add-apt-repository -y -q \
+	&& add-apt-repository -y \
 		ppa:teward/znc \
 	&& apt-get update -y \
 	&& apt-get install -y -q \
@@ -21,8 +21,8 @@ RUN apt-get update -y \
 		python-software-properties \
 		software-properties-common \
 	&& apt-get autoremove -y -q --purge \
-	&& apt-get clean \
-	&& apt-get autoclean
+	&& apt-get clean -y \
+	&& apt-get autoclean -y
 
 RUN useradd znc \
 	&& mkdir /znc-data
