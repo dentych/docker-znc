@@ -1,34 +1,21 @@
-FROM ubuntu
+FROM alpine
 MAINTAINER dentych
 
-ARG DEBIAN_FRONTEND=noninteractive
-
-RUN apt-get update -y \
-	&& apt-get install -y -q \
-		python-software-properties \
-		software-properties-common \
-	&& add-apt-repository -y \
-		ppa:teward/znc \
-	&& apt-get update -y \
-	&& apt-get install -y -q \
+RUN apk update \
+	&& apk add \
 		znc \
-		znc-dbg \
-		znc-dev \
-		znc-perl \
-		znc-python \
-		znc-tcl \
-	&& apt-get purge -y -q \
-		python-software-properties \
-		software-properties-common \
-	&& apt-get autoremove -y -q --purge \
-	&& apt-get clean -y \
-	&& apt-get autoclean -y
-
-RUN useradd znc \
+		znc-extra \
+		znc-modperl \
+		znc-modpython \
+		znc-modtcl \
+		ca-certificates \
+		sudo \
 	&& mkdir /znc-data
-
+	
 COPY entrypoint.sh /entrypoint.sh
 COPY znc.conf /znc.conf
+
+RUN chmod +x /entrypoint.sh
 
 WORKDIR /znc-data
 
