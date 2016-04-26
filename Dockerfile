@@ -17,6 +17,10 @@ RUN apt-get update -y \
 		znc-perl \
 		znc-python \
 		znc-tcl \
+	&& apt-get purge -y -q \
+		python-software-properties \
+		software-properties-common \
+	&& apt-get autoremove -y -q \
 	&& apt-get clean \
 	&& apt-get autoclean
 
