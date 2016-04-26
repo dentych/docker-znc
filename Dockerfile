@@ -20,7 +20,7 @@ RUN apt-get update -y \
 	&& apt-get purge -y -q \
 		python-software-properties \
 		software-properties-common \
-	&& apt-get autoremove -y -q \
+	&& apt-get autoremove -y -q --purge \
 	&& apt-get clean \
 	&& apt-get autoclean
 
