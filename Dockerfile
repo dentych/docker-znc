@@ -2,21 +2,19 @@ FROM alpine
 MAINTAINER dentych
 
 RUN apk update \
-	&& apk add \
+	&& apk add --no-cache \
 		znc \
 		znc-extra \
 		znc-modperl \
 		znc-modpython \
 		znc-modtcl \
 		ca-certificates \
-		sudo \
-	&& mkdir /znc-data
-	
-COPY entrypoint.sh /entrypoint.sh
-COPY znc.conf /znc.conf
+	&& mkdir /znc-data \
+	&& chown -R znc:znc /znc-data
 
-RUN chmod +x /entrypoint.sh
+USER znc
 
 WORKDIR /znc-data
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["znc", "--datadir=/znc-data"]
+CMD ["--foreground"]
