@@ -1,8 +1,7 @@
 FROM alpine
 MAINTAINER dentych
 
-RUN apk update \
-	&& apk add --no-cache \
+RUN apk add --update --no-cache \
 		znc \
 		znc-extra \
 		znc-modperl \
