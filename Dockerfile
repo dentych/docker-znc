@@ -15,5 +15,4 @@ USER znc
 
 WORKDIR /znc-data
 
-ENTRYPOINT ["znc", "--datadir=/znc-data"]
-CMD ["--foreground"]
+CMD ["znc", "--datadir=/znc-data", "--foreground"]
